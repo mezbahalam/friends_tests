@@ -12,6 +12,7 @@ gem 'rails', '4.1.8'
   group :development, :test do
     gem 'sqlite3'
     gem 'sqlite3-ruby'
+    gem 'spring'
   end
 
   group :production do
