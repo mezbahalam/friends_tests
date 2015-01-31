@@ -130,6 +130,14 @@ class UserFriendshipsControllerTest < ActionController::TestCase
         end
       end
 
+      context "successfully" do
+        should "create two user friendship objects" do
+          assert_difference 'UserFriendship.count', 2 do
+            post :create, user_friendship: { friend_id: users(:mez).profile_name }
+          end
+        end
+      end
+      
       context "with a valid friend_id" do
         should "create two user friendship objects" do
           assert_difference 'UserFriendship.count', 2 do

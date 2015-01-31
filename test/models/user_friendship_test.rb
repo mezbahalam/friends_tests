@@ -39,10 +39,39 @@ class UserFriendshipTest < ActiveSupport::TestCase
     end
   end
 
+  context "#mutual_friendship" do
+    setup do
+      UserFriendship.request users(:mezbah), users(:mezba)
+
+      @friendship1 = users(:mezbah).user_friendships.where(friend_id: users(:mezba).id).first
+      @friendship2 = users(:mezba).user_friendships.where(friend_id: users(:mezbah).id).first
+    end
+
+    should "correctly find the mutual friendship" do
+      assert_equal @friendship2, @friendship1.mutual_friendship
+    end
+
+  end
+
+  context "#accept_mutual_friendship!" do
+    setup do
+      UserFriendship.request users(:mezbah), users(:mezba)
+    end
+
+    should "accept the mutual friendship" do
+      friendship1 = users(:mezbah).user_friendships.where(friend_id: users(:mezba).id).first
+      friendship2 = users(:mezba).user_friendships.where(friend_id: users(:mezbah).id).first
+
+      friendship1.accept_mutual_friendship!
+      friendship2.reload
+      assert_equal 'accepted', friendship2.state
+    end
+
+  end
 
   context "#accept!" do
     setup do
-      @user_friendship = UserFriendship.create user: users(:mezbah), friend: users(:mez)
+      @user_friendship = UserFriendship.request users(:mezbah), users(:mez)
     end
 
     should "set the state to accepted" do
@@ -60,6 +89,11 @@ class UserFriendshipTest < ActiveSupport::TestCase
       @user_friendship.accept!
       users(:mezbah).friends.reload
       assert users(:mezbah).friends.include?(users(:mez))
+    end
+
+    should "accept the mutual friendship" do
+      @user_friendship.accept!
+      assert_equal 'accepted', @user_friendship.mutual_friendship.state
     end
   end
 
