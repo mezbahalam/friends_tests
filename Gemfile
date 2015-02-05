@@ -37,3 +37,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'devise'
 gem 'simple_form'
 gem 'state_machine'
+gem 'draper'
