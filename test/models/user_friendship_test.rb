@@ -137,4 +137,16 @@ class UserFriendshipTest < ActiveSupport::TestCase
       assert !UserFriendship.exists?(@friendship2.id)
     end
   end
+
+  context "#block!" do
+    setup do
+      @user_friendship = UserFriendship.request users(:mezbah), users(:mez)
+    end
+
+    should "set the state to blocked" do
+      @user_friendship.block!
+      assert_equal 'blocked', @user_friendship.state
+      assert_equal 'blocked', @user_friendship.mutual_friendship.state
+    end
+  end
 end
