@@ -18,6 +18,16 @@ class User < ActiveRecord::Base
            through: :user_friendships,
            source: :friend
 
+  has_many :requested_user_friendships, -> { where(user_friendships: { state: 'requested' }) },
+           class_name: 'UserFriendship',
+           foreign_key: :user_id
+
+
+  has_many :requested_friends,
+           -> { where user_friendships: { state: "pending" } },
+           through: :user_friendships,
+           source: :friend
+
 
   validates :first_name, presence: true
   validates :last_name, presence: true

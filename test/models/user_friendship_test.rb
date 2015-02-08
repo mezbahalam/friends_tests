@@ -148,5 +148,11 @@ class UserFriendshipTest < ActiveSupport::TestCase
       assert_equal 'blocked', @user_friendship.state
       assert_equal 'blocked', @user_friendship.mutual_friendship.state
     end
+
+    should "not allow new requests once blocked" do
+      @user_friendship.block!
+      uf = UserFriendship.request users(:mezbah), users(:mez)
+      assert !uf.save
+    end
   end
 end
