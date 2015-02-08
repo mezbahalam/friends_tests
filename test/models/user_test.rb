@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   should have_many(:user_friendships)
   should have_many(:friends)
   should have_many(:pending_user_friendships)
-  should have_many(:pending_friends)1
+  should have_many(:pending_friends)
   should have_many(:requested_user_friendships)
   should have_many(:requested_friends)
 
