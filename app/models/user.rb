@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
            through: :user_friendships,
            source: :friend
 
+
+
   has_many :requested_user_friendships, -> { where(user_friendships: { state: 'requested' }) },
            class_name: 'UserFriendship',
            foreign_key: :user_id
