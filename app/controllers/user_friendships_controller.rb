@@ -85,19 +85,18 @@ class UserFriendshipsController < ApplicationController
   end
 
   private
-
   def friendship_association
     case params[:list]
-    when nil
-      current_user.user_friendships
-    when 'blocked'
-      current_user.blocked_user_friendships
-    when 'pending'
-      current_user.pending_user_friendships
-    when 'accepted'
-      current_user.accepted_user_friendships
-    when 'requested'
-      current_user.requested_user_friendships
+      when nil
+        current_user.user_friendships
+      when 'blocked'
+        current_user.blocked_user_friendships
+      when 'pending'
+        current_user.pending_user_friendships
+      when 'accepted'
+        current_user.accepted_user_friendships
+      when 'requested'
+        current_user.requested_user_friendships
     end
   end
 end
