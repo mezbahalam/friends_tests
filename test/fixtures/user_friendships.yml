@@ -10,5 +10,7 @@ one:
 
 
 
-two: {}
-#  column: value
+blocked_by_mezbah:
+  user: mezbah
+  friend: blocked_friend
+  state: 'blocked'

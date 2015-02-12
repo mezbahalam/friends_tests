@@ -16,3 +16,10 @@ mez:
   last_name: "Al"
   email: "mezbahalam@gmail.com"
   profile_name: "mez_al"
+
+
+blocked_friend:
+  first_name: 'Blocked'
+  last_name: 'Friend'
+  email: 'block@example.com'
+  profile_name: 'youblockedme'
